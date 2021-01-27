@@ -38,6 +38,11 @@ cd-article:
     component:
       components/cd-article/cd-article.css: {}
 
+cd-article-list:
+  css:
+    component:
+      components/cd-article-list/cd-article-list.css: {}
+
 cd-author:
   css:
     component:
@@ -163,6 +168,11 @@ cd-hero--style-three:
       components/cd-hero/cd-hero--style-three.css: {}
   dependencies:
     - common_design/cd-hero
+
+cd-hr:
+  css:
+    component:
+      components/cd-hr/cd-hr.css: {}
 
 cd-image-grid:
   css:
