@@ -3,44 +3,48 @@ table {
   margin-bottom: 1rem;
 }
 
+caption {
+  margin-bottom: 0.5rem;
+}
+
 th {
   text-align: left;
 }
 
-[dir="rtl"] th {
-  text-align: right;
+th,
+td {
+  padding: 0 0.25rem 0 0;
 }
 
-table caption {
-  margin-top: 0.5rem;
-  caption-side: bottom;
-  text-align: left;
-}
-
-[dir="rtl"] table caption {
-  text-align: right;
+th.hidden,
+td.hidden {
+  display: none;
 }
 
 .cd-table {
-  width: 100%;
-  margin: 0 auto 3rem;
+  margin: 0 auto 1rem;
   border-collapse: collapse;
+  width: 100%;
 }
 
 .cd-table caption {
-  padding: 0.25rem 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  caption-side: bottom;
+  text-align: left;
   background: var(--cd-blue-grey);
+  padding: 0.25rem 0.5rem;
 }
 
 .cd-table th,
 .cd-table td {
   padding: 0.5rem;
   text-align: left;
+  vertical-align: bottom;
 }
 
-[dir="rtl"] .cd-table th,
-[dir="rtl"] .cd-table td {
-  text-align: right;
+.cd-table td:not(:empty) {
+  min-width: 6rem;
 }
 
 .cd-table th {
@@ -49,22 +53,28 @@ table caption {
   background: var(--cd-blue-grey);
 }
 
+.cd-table td  {
+  border-bottom: 1px solid var(--cd-blue-grey);
+}
+
 .cd-table a {
   word-break: break-word;
 }
 
 @media (min-width: 576px) {
   .cd-table th[data-sort-type="numeric"],
-  .cd-table .cd-table--amount,
-  .cd-table .cd-table--amount-total {
+  .cd-table td[class*="amount"] {
     text-align: right;
+    white-space: nowrap;
   }
+}
 
-  [dir="rtl"] .cd-table th[data-sort-type="numeric"],
-  [dir="rtl"] .cd-table .cd-table--amount,
-  [dir="rtl"] .cd-table .cd-table--amount-total {
-    text-align: left;
-  }
+*[class*="total"] {
+  font-weight: bold;
+}
+
+.cd-table--date {
+  font-weight: bold;
 }
 
 .cd-table tfoot {
@@ -81,17 +91,10 @@ table caption {
 }
 
 .cd-table--row-numbers tbody tr td.cd-table--row-num:first-child::before {
-  min-width: 1em;
   content: counter(rowNumber);
+  min-width: 1rem;
+  margin-right: 0.5rem;
   font-weight: normal;
-}
-
-[dir="ltr"] .cd-table--row-numbers tbody tr td.cd-table--row-num:first-child::before {
-  margin-right: 0.5em;
-}
-
-[dir="rtl"] .cd-table--row-numbers tbody tr td.cd-table--row-num:first-child::before {
-  margin-left: 0.5em;
 }
 
 /* Striping */
@@ -103,84 +106,24 @@ table caption {
   background: var(--cd-grey--light);
 }
 
-@media (max-width: 575px) {
-  /* Force table to not be like tables anymore */
-  .cd-table--responsive,
-  .cd-table--responsive thead,
-  .cd-table--responsive tbody,
-  .cd-table--responsive tfoot,
-  .cd-table--responsive th,
-  .cd-table--responsive td,
-  .cd-table--responsive tr {
-    display: block;
-  }
+/* Row that looks like a heading */
+td.cd-table--row-heading {
+  padding: 2rem 0.25rem 0.25rem;
+  font-weight: bold;
+  border-bottom: 2px solid var(--cd-ocha-blue);
+}
 
-  .cd-table--responsive caption {
-    display: block;
-  }
+/* Readmore link with SVG icon */
+.cd-table .cd-table--readmore:not(:empty)  {
+  min-width: unset;
+}
 
-  /* Hide table headers (but not display: none;, for accessibility) */
-  .cd-table--responsive thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
+.cd-table--readmore svg {
+  width: 1rem;
+  height: 1rem;
+  fill: var(--cd-ocha-blue);
+}
 
-  .cd-table--responsive tr {
-    padding: 0 !important;
-    border-bottom: 1px solid var(--cd-grey--light);
-  }
-
-  .cd-table--responsive td {
-    position: relative;
-    min-height: 2rem; /* label should wrap */
-    padding: 0.5rem;
-    padding-left: 40% !important;
-    text-align: left;
-    white-space: normal !important;
-    /* Behave  like a "row" */
-    border: none;
-    border-bottom: 1px solid var(--cd-blue-grey);
-  }
-
-  [dir="rtl"] .cd-table--responsive td {
-    padding-right: 40% !important;
-    padding-left: auto !important;
-    text-align: right;
-  }
-
-  .cd-table--responsive td:before {
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    width: 35%;
-    padding-right: 1rem;
-    /* Label the data */
-    content: attr(data-content);
-    text-align: left;
-    color: var(--cd-ocha-blue);
-    font-size: 0.875rem;
-    font-weight: bold;
-  }
-
-  [dir="rtl"] .cd-table--responsive td:before {
-    right: 0.5rem;
-    left: auto;
-    padding-right: 0;
-    padding-left: 1rem;
-    text-align: right;
-  }
-
-  .cd-table--responsive tfoot td {
-    border-bottom: 0 none;
-  }
-
-  .cd-table--row-numbers tbody tr td.cd-table--row-num {
-    height: 3rem;
-  }
-
-  .cd-table--row-numbers tbody tr td.cd-table--row-num::before {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
+.cd-table--readmore svg:hover {
+  fill: var(--cd-blue--dark);
 }
