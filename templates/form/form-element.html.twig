@@ -54,13 +54,15 @@
     title_display not in ['after', 'before'] ? 'form-no-label',
     disabled == 'disabled' ? 'form-disabled',
     errors ? 'form-item--error',
-    'cd-form__item'
+    'cd-form__item',
+    '[ cd-flow ]'
   ]
 %}
 {%
   set description_classes = [
     'description',
     description_display == 'invisible' ? 'visually-hidden',
+    'cd-form__description'
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
